@@ -1,0 +1,8 @@
+# npm
+/node_modules
+
+# Logs
+npm-debug.log*
+
+# 11ty
+/_site
