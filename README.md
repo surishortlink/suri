@@ -52,28 +52,30 @@ a link shortener that's easier than that!
 
 To install Suri somewhere else, or just on your own machine:
 
-1.  Make sure you have a compatible version of [Node.js](https://nodejs.org/)
-    (see `engines.node` in [`package.json`](package.json)).
-    [nvm](https://github.com/nvm-sh/nvm) is the recommended installation method
-    on your own machine:
+1. Fork this repository to create your own copy and clone to your machine.
 
-    ```bash
-    $ nvm install
-    ```
+1. Make sure you have a compatible version of [Node.js](https://nodejs.org/)
+   (see `engines.node` in [`package.json`](package.json)).
+   [nvm](https://github.com/nvm-sh/nvm) is the recommended installation method
+   on your own machine:
 
-1.  Install dependencies with npm:
+   ```bash
+   $ nvm install
+   ```
 
-    ```bash
-    $ npm install
-    ```
+1. Install dependencies with npm:
 
-1.  Build the static site:
+   ```bash
+   $ npm install
+   ```
 
-    ```bash
-    $ npm run build
-    ```
+1. Build the static site:
 
-1.  Deploy the generated `_site` directory to its final destination.
+   ```bash
+   $ npm run build
+   ```
+
+1. Deploy the generated `_site` directory to its final destination.
 
 ## Development
 
