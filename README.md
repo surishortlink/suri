@@ -77,6 +77,24 @@ To install Suri somewhere else, or just on your own machine:
 
 1. Deploy the generated `_site` directory to its final destination.
 
+### Build Docker Image
+
+In order to use Suri without installing it to your local system, you can build a docker image.
+
+1. Make sure to have [Docker CE](https://docs.docker.com/engine/install/) installed.
+
+1. Trigger your docker image build process with this command:
+
+   ```bash
+   $ docker build -t suri .
+   ```
+
+1. Build the static site:
+
+   ```bash
+   $ docker run --rm -it -v ${PWD}:/app suri
+   ```
+
 ## Development
 
 The following includes a few instructions for developing on Suri. For
