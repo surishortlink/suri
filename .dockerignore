@@ -1,0 +1,4 @@
+# Ignore unneccessary folders
+/node_modules
+.git
+_site
