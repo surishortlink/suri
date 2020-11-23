@@ -19,7 +19,7 @@ because you've never actually done anything with it.
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https%3A%2F%2Fgithub.com%2Fjstayton%2Fsuri)
 
 Once complete, try accessing the root path of your URL – it should redirect back
-here if everything's working.
+to [my GitHub profile](https://github.com/jstayton) if everything's working.
 
 ### Manage Links
 
@@ -28,9 +28,9 @@ with a few examples to start:
 
 ```json
 {
-  "/": "https://github.com/jstayton/suri",
+  "/": "https://github.com/jstayton",
   "1": "https://fee.org/articles/the-use-of-knowledge-in-society/",
-  "gh": "https://github.com/jstayton"
+  "tw": "https://twitter.com/kidjustino"
 }
 ```
 
