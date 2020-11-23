@@ -8,7 +8,8 @@
   "license": "MIT",
   "repository": "jstayton/suri",
   "scripts": {
-    "build": "NODE_ENV=production eleventy",
+    "build": "npm run clean && NODE_ENV=production eleventy",
+    "clean": "del _site",
     "dev": "eleventy --serve",
     "lint": "prettier --check .",
     "lint:fix": "prettier --write .",
@@ -17,6 +18,7 @@
   "dependencies": {},
   "devDependencies": {
     "@11ty/eleventy": "^0.11.1",
+    "del-cli": "^3.0.1",
     "prettier": "2.2.0",
     "release-it": "^14.2.1"
   },
