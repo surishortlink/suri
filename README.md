@@ -48,6 +48,15 @@ _Pro tip_: Bookmark the page to
 (or wherever), and use the default commit message that's populated. Now show me
 a link shortener that's easier than that!
 
+### Config
+
+Environment variables are used to set config options. There is only one at this
+point:
+
+| Variable  | Description                                                        | Values   | Default |
+| --------- | ------------------------------------------------------------------ | -------- | ------- |
+| `SURI_JS` | Whether to redirect with JavaScript instead of a `<meta>` refresh. | `1`, `0` | `0`     |
+
 ### Install Manually
 
 To install Suri somewhere else, or just on your own machine:
