@@ -22,11 +22,14 @@ RUN npm -v
 
 # Create and copy app folder
 RUN mkdir -p /app
-COPY ./* /app/
+COPY ./ /app/
 WORKDIR /app
 
 # Install app specific packages
 RUN npm install
 
+# Create mountpoint folder
+RUN mkdir -p /data
+
 # The command to run the site build in /app
-CMD npm run build
+CMD cp -R /data /app && npm run build && cp -R /app/_site /data/

@@ -92,7 +92,7 @@ In order to use Suri without installing it to your local system, you can build a
 1. Build the static site:
 
    ```bash
-   $ docker run --rm -it -v ${PWD}:/app suri
+   $ docker run --rm -it -v ${PWD}:/data suri
    ```
 
 ## Development
