@@ -104,6 +104,7 @@ In order to use Suri without installing it to your local system, you can build a
    $ docker run --rm -it -v ${PWD}:/data suri
    ```
    * You may specify user- and group-id with `-e UID=<value>` and `-e GID=<value>` that will be used to write the output files. **Hint**: It may be useful to choose the values from your local user account.
+   * If you do not provide values for UID and GID, the docker image will use 1000:1000 as default value.
 
 ## Development
 

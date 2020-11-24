@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN echo "Using UID $UID and GID $GID."
 
 # Create group and user
-RUN groupadd -g $GID appgroup
+RUN groupadd -f -g $GID appgroup
 RUN useradd -r -u $UID -g $GID appuser
 
 # Update and install various packages
