@@ -1,6 +1,15 @@
 FROM ubuntu:20.04
 LABEL maintainer="Max Kratz <account@maxkratz.com>"
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive \
+    UID="${UID:-1000}" \
+    GID="${GID:-1000}"
+
+# Output user- and groupid
+RUN echo "Using UID $UID and GID $GID."
+
+# Create group and user
+RUN groupadd -g $GID appgroup
+RUN useradd -r -u $UID -g $GID appuser
 
 # Update and install various packages
 RUN apt-get update -q && \
@@ -20,16 +29,15 @@ RUN apt install nodejs
 RUN node -v
 RUN npm -v
 
-# Create and copy app folder
+# Create and copy app and data folder
 RUN mkdir -p /app
+RUN mkdir -p /data
+
 COPY ./ /app/
 WORKDIR /app
 
 # Install app specific packages
 RUN npm install
 
-# Create mountpoint folder
-RUN mkdir -p /data
-
 # The command to run the site build in /app
-CMD cp -R /data /app && npm run build && cp -R /app/_site /data/
+CMD cp -R /data /app && npm run build && cp -R /app/_site /data/ && chown -R $UID:$GID /data/_site
