@@ -6,4 +6,9 @@ pagination:
 permalink: "{{ link }}/"
 ---
 
-<!DOCTYPE html><meta http-equiv=refresh content="0; url={{ links[link] }}">
+<!DOCTYPE html>
+{% if env.js -%}
+  <script>window.location.replace('{{ links[link] }}')</script>
+{% else -%}
+  <meta http-equiv=refresh content="0; url={{ links[link] }}">
+{% endif -%}
