@@ -1,0 +1,34 @@
+{
+  "name": "Suri",
+  "description": "Your own link shortener that's easily deployed as a static site (for free)",
+  "repository": "https://github.com/jstayton/suri",
+  "keywords": [
+    "self hosted",
+    "static site",
+    "bitly",
+    "shorten urls",
+    "link shortener",
+    "shortlink",
+    "shortlinks"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku-community/static"
+    }
+  ],
+  "env": {
+    "SURI_JS": {
+      "description": "Whether to redirect with JavaScript instead of a `<meta>` refresh.",
+      "value": "0"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  }
+}
