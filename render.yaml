@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: suri
+    env: static
+    buildCommand: npm run build
+    staticPublishPath: ./_site
+    envVars:
+      - key: SURI_JS
+        value: 0
