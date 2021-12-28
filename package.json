@@ -18,9 +18,9 @@
   "dependencies": {},
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
-    "del-cli": "^4.0.0",
-    "prettier": "2.3.2",
-    "release-it": "^14.10.0"
+    "del-cli": "^4.0.1",
+    "prettier": "2.5.1",
+    "release-it": "^14.11.8"
   },
   "engines": {
     "node": ">=12"
