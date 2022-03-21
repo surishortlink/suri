@@ -1,14 +1,14 @@
 {
-  "name": "suri",
+  "name": "4gl-uk",
   "version": "0.4.1",
   "private": true,
-  "description": "Your own link shortener that's easily deployed as a static site (for free)",
-  "homepage": "https://github.com/jstayton/suri#readme",
+  "description": "4gl Apps link shortener",
+  "homepage": "https://4gl.io",
   "bugs": "https://github.com/jstayton/suri/issues",
   "license": "MIT",
   "repository": "jstayton/suri",
   "scripts": {
-    "build": "npm run clean && NODE_ENV=production eleventy",
+    "build": "npm run clean && NODE_ENV=production eleventy && echo \"4gl.uk\" > _site/CNAME",
     "clean": "del _site",
     "dev": "eleventy --serve",
     "lint": "prettier --check .",
