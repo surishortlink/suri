@@ -1,29 +1,6 @@
-# Suri
+# Links
 
-Suri is your own link shortener that's easily deployed as a static site. No
-server-side hosting, serverless cloud functions, or database necessary. Suri can
-be deployed to Vercel, Netlify, and more for free in 60 seconds.
-
-Suri doesn't give a 💩 about "technically superior" `3xx` server redirects. Suri
-just wants you to finally use that domain you waste \$39/year on because you've
-never actually done anything with it.
-
-Try it out with one of my own shortlinks: https://jstayton.com/tw 👉🏻
-https://twitter.com/kidjustino
-
-## Getting Started
-
-### Install in One Click (for Free)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fjstayton%2Fsuri&project-name=suri&repository-name=suri)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https%3A%2F%2Fgithub.com%2Fjstayton%2Fsuri)
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https%3A%2F%2Fgithub.com%2Fjstayton%2Fsuri)
-
-[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https%3A%2F%2Fgithub.com%2Fjstayton%2Fsuri%2Ftree%2Fmaster)
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https%3A%2F%2Fgithub.com%2Fjstayton%2Fsuri)
-
-Once complete, try accessing the root path of your URL – it should redirect back
-to [my GitHub profile](https://github.com/jstayton) if everything's working.
+Self hosted link shortner courtesy of: https://github.com/jstayton/suri
 
 ### Manage Links
 
