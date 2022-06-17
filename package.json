@@ -19,9 +19,9 @@
     "@11ty/eleventy": "^1.0.1",
     "del-cli": "^4.0.1",
     "prettier": "2.7.1",
-    "release-it": "^14.14.3"
+    "release-it": "^15.0.0"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   }
 }
