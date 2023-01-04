@@ -13,7 +13,7 @@
     "dev": "eleventy --serve",
     "lint": "prettier --check .",
     "lint:fix": "prettier --write .",
-    "release": "release-it"
+    "release": "release-it --only-version"
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.2",
