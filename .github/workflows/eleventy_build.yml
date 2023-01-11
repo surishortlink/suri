@@ -4,7 +4,7 @@ name: Eleventy Build
 on:
   push:
     branches:
-      - master
+      - gh-pages
 permissions:
   pull-requests: write
   issues: write
