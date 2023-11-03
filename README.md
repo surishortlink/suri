@@ -73,19 +73,19 @@ To install Suri somewhere else, or just on your own machine:
    on your own machine:
 
    ```bash
-   $ nvm install
+   nvm install
    ```
 
 1. Install dependencies with npm:
 
    ```bash
-   $ npm install
+   npm install
    ```
 
 1. Build the static site:
 
    ```bash
-   $ npm run build
+   npm run build
    ```
 
 1. Deploy the generated `_site` directory to its final destination.
@@ -105,7 +105,7 @@ Follow the "Install Manually" section above to setup on your own machine.
 Start the development server:
 
 ```bash
-$ npm run dev
+npm run dev
 ```
 
 ### Code Style
@@ -118,7 +118,7 @@ that automatically formats on save.
 To run via the command line:
 
 ```bash
-$ npm run lint
+npm run lint
 ```
 
 ## Releasing
@@ -129,7 +129,7 @@ lives. [Release It!](https://github.com/release-it/release-it) is then used to
 interactively orchestrate the release process:
 
 ```bash
-$ npm run release
+npm run release
 ```
 
 ![piratepx](https://app.piratepx.com/ship?p=e91ddd1b-31ad-4c36-b03e-be4a1e9a7678&i=suri)
