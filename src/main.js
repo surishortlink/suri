@@ -90,7 +90,7 @@ async function createLink({ linkPath, redirectURL, config }) {
   console.log(`Creating link: ${linkPath}`)
 
   try {
-    await mkdir(linkDirPath)
+    await mkdir(linkDirPath, { recursive: true })
   } catch (error) {
     throw new SuriError(`Failed to create link directory: ${linkPath}`, error)
   }
