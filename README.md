@@ -1,6 +1,7 @@
-<p align="center" width="100%">
-  <img src="logo.png" width="200" />
-</p>
+<h1 align="center" width="100%">
+  <img src="logo.png" width="200" /><br>
+  <i>Your Own Shortlinks</i>
+</h1>
 
 Suri generates your own shortlinks as an easily deployed static site. No
 server-side hosting, serverless cloud functions, or database necessary. Suri can
