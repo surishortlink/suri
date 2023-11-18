@@ -128,8 +128,8 @@ There are a few other noteworthy changes in v1 beyond that:
   you found it useful.
 - Removed `npm run release` to release a new version of Suri. You can manually
   add it back if you want to tag release versions of your repository.
-- Removed Heroku as a one click deploy platform because they no longer offer a
-  free tier.
+- Removed Heroku as a deploy platform because they no longer offer a free tier.
+  You can still deploy there quite easily if you're willing to pay.
 
 ## Development
 
