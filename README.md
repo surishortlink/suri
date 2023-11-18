@@ -3,24 +3,31 @@
 </h1>
 
 <h3 align="center" width="100%">
-  <i>Your Own Shortlinks</i>
+  <i>Your own shortlinks as an easily deployed static site</i>
 </h3>
 
-Suri generates your own shortlinks as an easily deployed static site. No
-server-side hosting, serverless cloud functions, or database necessary. Suri can
-be deployed to Vercel, Netlify, and more (usually for free) in a few minutes.
+No server-side hosting, serverless cloud functions, or database necessary. Suri
+static sites can be deployed to Vercel, Netlify, and more (usually for free) in
+a few minutes.
 
-Suri doesn't give a 💩 about "technically superior" `3xx` server redirects. Suri
-just wants you to finally use that domain you waste \$39/year on because you've
-never actually done anything with it.
+Suri doesn't care about "technically superior" `3xx` server redirects. Suri just
+wants you to finally use that domain you spend \$59/year on and take back your
+shortlinks from the Bitlys and TinyURLs of the web.
 
-Try it out with one of my own shortlinks: https://jstayton.com/tw 👉🏻
-https://twitter.com/kidjustino
+## Try It Out
 
-## Getting Started
+https://surishort.link/gh ⇒ https://github.com/jstayton/suri
+
+https://surishort.link is an example site that showcases Suri in action. You can
+check out the
+[repository for the site](https://github.com/staticsuri/surishort.link) and the
+[file that maps the links](https://github.com/staticsuri/surishort.link) to see
+how it works.
+
+## Quick Start
 
 Suri has template repositories that make it super easy to get started. Choose
-the platform you're deploying to and follow the instructions:
+the platform you're deploying to and follow the step by step instructions:
 
 - [Deploy to DigitalOcean](https://github.com/staticsuri/suri-deploy-digitalocean)
 - [Deploy to GitHub Pages](https://github.com/staticsuri/suri-deploy-github)
@@ -36,6 +43,39 @@ provider or simply hosting it yourself:
 - [Deploy with Node.js](https://github.com/staticsuri/suri-deploy-nodejs)
 
 ## How It Works
+
+Suri ships with a `suri` executable file that generates a static site from a
+`links.json` file. The static site is output to a directory named `build`.
+
+All of the template repositories above are configured with a `build` script that
+invokes this executable, making the command you run simple:
+
+```bash
+npm run build
+```
+
+You'll find the `links.json` file in the `src` directory, already populated with
+a few examples:
+
+```json
+{
+  "/": "https://github.com/jstayton/suri",
+  "1": "https://fee.org/articles/the-use-of-knowledge-in-society/",
+  "tw": "https://twitter.com"
+}
+```
+
+The key is the "shortlink" path that gets redirected, and the value is the
+target URL. Keys can be as short or as long as you want, using whatever mixture
+of characters you want. `/` is a special entry for redirecting the root path.
+
+When you make a change to the `links.json` file, simply re-build and re-deploy
+the static site. Many of the platforms that Suri has template repositories for
+are configured to do this automatically.
+
+Finally, any files in the `public` directory will be copied over to the `build`
+directory without modification. This can be useful for files like `favicon.ico`
+or `robots.txt` (Suri provides sensible defaults for both).
 
 ## Upgrading v0 to v1
 
@@ -127,16 +167,15 @@ npm run lint
 
 ## Releasing
 
-After development is done in the `development` branch and is ready for release,
-it should be merged into the `main` branch, where the latest release code lives.
-[Release It!](https://github.com/release-it/release-it) is then used to
-orchestrate the release process:
+When the `development` branch is ready for release,
+[Release It!](https://github.com/release-it/release-it) is used to orchestrate
+the release process:
 
 ```bash
 npm run release
 ```
 
-Once the release process is complete, merge the `main` branch back into the
-`development` branch. They should have the same history at this point.
+Once the release process is complete, merge the `development` branch into the
+`main` branch, which should always reflect the latest release.
 
 ![piratepx](https://app.piratepx.com/ship?p=e91ddd1b-31ad-4c36-b03e-be4a1e9a7678&i=suri)
