@@ -16,66 +16,86 @@ shortlinks from the Bitlys and TinyURLs of the web.
 
 ## Try It Out
 
-https://surishort.link/gh ⇒ https://github.com/jstayton/suri
+https://surishort.link/gh ⇒ https://github.com/surishortlink/suri
 
 https://surishort.link is an example site that showcases Suri in action. You can
-check out the
-[repository for the site](https://github.com/staticsuri/surishort.link) and the
-[file that maps the links](https://github.com/staticsuri/surishort.link) to see
-how it works.
+check out
+[the repository for the site](https://github.com/surishortlink/surishort.link)
+and
+[the file that manages the links](https://github.com/surishortlink/surishort.link/blob/main/src/links.json)
+to see how it works.
 
 ## Quick Start
 
 Suri has template repositories that make it super easy to get started. Choose
 the platform you're deploying to and follow the step by step instructions:
 
-- [Deploy to DigitalOcean](https://github.com/staticsuri/suri-deploy-digitalocean)
-- [Deploy to GitHub Pages](https://github.com/staticsuri/suri-deploy-github)
-- [Deploy to Netlify](https://github.com/staticsuri/suri-deploy-netlify)
-- [Deploy to Render](https://github.com/staticsuri/suri-deploy-render)
-- [Deploy to Vercel](https://github.com/staticsuri/suri-deploy-vercel)
+- [Deploy to DigitalOcean](https://github.com/surishortlink/suri-deploy-digitalocean)
+- [Deploy to GitHub Pages](https://github.com/surishortlink/suri-deploy-github)
+- [Deploy to Netlify](https://github.com/surishortlink/suri-deploy-netlify)
+- [Deploy to Render](https://github.com/surishortlink/suri-deploy-render)
+- [Deploy to Vercel](https://github.com/surishortlink/suri-deploy-vercel)
 
 Not deploying to one of those platforms? No worries. Here are a few generic
 options that cover most other scenarios, whether that's a different cloud
-provider or simply hosting it yourself:
+provider or hosting it yourself:
 
-- [Deploy with Docker](https://github.com/staticsuri/suri-deploy-docker)
-- [Deploy with Node.js](https://github.com/staticsuri/suri-deploy-nodejs)
+- [Deploy with Docker](https://github.com/surishortlink/suri-deploy-docker)
+- [Deploy with Node.js](https://github.com/surishortlink/suri-deploy-nodejs)
 
 ## How It Works
 
-Suri ships with a `suri` executable file that generates a static site from a
+### Manage Links
+
+At the heart of Suri is the `links.json` file, located in the `src` directory,
+where you manage your links. All of the template repositories include this file
+seeded with a few examples:
+
+```json
+{
+  "/": "https://www.youtube.com/watch?v=CsHiG-43Fzg",
+  "1": "https://fee.org/articles/the-use-of-knowledge-in-society/",
+  "gh": "https://github.com/surishortlink/suri"
+}
+```
+
+It couldn't be simpler: the key is the "shortlink" path that gets redirected,
+and the value is the target URL. Keys can be as short or as long as you want,
+using whatever mixture of characters you want. `/` is a special entry for
+redirecting the root path.
+
+### Build Static Site
+
+Suri ships with a `suri` executable file that generates the static site from the
 `links.json` file. The static site is output to a directory named `build`.
 
-All of the template repositories above are configured with a `build` script that
+All of the template repositories are configured with a `build` script that
 invokes this executable, making the command you run simple:
 
 ```bash
 npm run build
 ```
 
-You'll find the `links.json` file in the `src` directory, already populated with
-a few examples:
+When you make a change to the `links.json` file, simply re-run this command to
+re-generate the static site, which can then be re-deployed. Many of the
+platforms that Suri has template repositories for are configured to do this
+automatically.
 
-```json
-{
-  "/": "https://github.com/jstayton/suri",
-  "1": "https://fee.org/articles/the-use-of-knowledge-in-society/",
-  "tw": "https://twitter.com"
-}
-```
+### Config
 
-The key is the "shortlink" path that gets redirected, and the value is the
-target URL. Keys can be as short or as long as you want, using whatever mixture
-of characters you want. `/` is a special entry for redirecting the root path.
+Configuration is handled through the `suri.config.json` file in the root
+directory. There is only one option at this point:
 
-When you make a change to the `links.json` file, simply re-build and re-deploy
-the static site. Many of the platforms that Suri has template repositories for
-are configured to do this automatically.
+| Option | Description                                                        | Type    | Default |
+| ------ | ------------------------------------------------------------------ | ------- | ------- |
+| `js`   | Whether to redirect with JavaScript instead of a `<meta>` refresh. | Boolean | `false` |
+
+### Public Directory
 
 Finally, any files in the `public` directory will be copied over to the `build`
-directory without modification. This can be useful for files like `favicon.ico`
-or `robots.txt` (Suri provides sensible defaults for both).
+directory without modification when the static site is built. This can be useful
+for files like `favicon.ico` or `robots.txt` (that said, Suri provides sensible
+defaults for both).
 
 ## Upgrading v0 to v1
 
@@ -118,6 +138,8 @@ probably just want to stick to v0 and continue using Eleventy.
 There are a few other noteworthy changes in v1 beyond that:
 
 - The static site is now output to a directory named `build` instead of `_site`.
+- Configuration is now done through the `suri.config.json` file instead of
+  environment variables.
 - Node.js >= v18 is now required, up from v14, which has reached end-of-life.
 - Removed `npm run clean` to delete the build directory. `npm run build` does
   this automatically before each new build. Otherwise, you can manually add it
@@ -130,6 +152,8 @@ There are a few other noteworthy changes in v1 beyond that:
   add it back if you want to tag release versions of your repository.
 - Removed Heroku as a deploy platform because they no longer offer a free tier.
   You can still deploy there quite easily if you're willing to pay.
+- This repository moved from my personal `jstayton` user on GitHub to a new
+  `surishortlink` organization for all Suri-related repositories.
 
 ## Development
 
