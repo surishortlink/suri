@@ -2,7 +2,7 @@
   "name": "suri",
   "version": "1.0.0",
   "type": "module",
-  "description": "Your own link shortener that's easily deployed as a static site (for free)",
+  "description": "Your own shortlinks as an easily deployed static site",
   "homepage": "https://github.com/jstayton/suri#readme",
   "bugs": "https://github.com/jstayton/suri/issues",
   "license": "MIT",
