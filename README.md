@@ -170,6 +170,16 @@ Install dependencies with npm:
 npm install
 ```
 
+### Docs
+
+[JSDoc](https://jsdoc.app/) is used to document the code.
+
+To generate the docs as HTML to the (git-ignored) `docs` directory:
+
+```bash
+npm run docs
+```
+
 ### Code Style & Linting
 
 [Prettier](https://prettier.io/) is setup to enforce a consistent code style.

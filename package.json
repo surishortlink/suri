@@ -10,6 +10,7 @@
   "main": "./src/main.js",
   "repository": "jstayton/suri",
   "scripts": {
+    "docs": "jsdoc src --recurse --destination docs",
     "lint": "npm run lint:format && npm run lint:quality",
     "lint:format": "prettier --check .",
     "lint:format:fix": "prettier --write .",
@@ -21,6 +22,7 @@
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-node": "^11.1.0",
+    "jsdoc": "^4.0.2",
     "prettier": "3.0.3",
     "release-it": "^16.2.1"
   },
