@@ -8,6 +8,6 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "extends": ["eslint:recommended", "plugin:node/recommended", "prettier"],
+  "extends": ["eslint:recommended", "plugin:n/recommended", "prettier"],
   "ignorePatterns": ["docs"]
 }
