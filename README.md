@@ -1,135 +1,49 @@
-# Suri
+# LXDAO Suri
 
-Suri is your own link shortener that's easily deployed as a static site. No
-server-side hosting, serverless cloud functions, or database necessary. Suri can
-be deployed to Vercel, Netlify, and more for free in 60 seconds.
+LXDAO Suri 是一个公开的链接缩短服务，任何人都可以提交请求来生成和管理自己的短链接。所有的短链接将由仓库管理员统一管理，并更新到 `suri/src/links.json` 文件中。
 
-Suri doesn't give a 💩 about "technically superior" `3xx` server redirects. Suri
-just wants you to finally use that domain you waste \$39/year on because you've
-never actually done anything with it.
+## 项目简介
 
-Try it out with one of my own shortlinks: https://jstayton.com/tw 👉🏻
-https://twitter.com/kidjustino
+Suri 是一个无需服务器托管、无服务器云函数或数据库的链接缩短工具。LXDAO Suri 可以快速部署到 Vercel、Netlify 等平台，帮助用户管理和简短链接。
 
-## Getting Started
+LXDAO 的短链接域名为 `https://s.lxdao.io/`。
 
-### Install in One Click (for Free)
+## 如何使用 LXDAO 短链接服务
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fjstayton%2Fsuri&project-name=suri&repository-name=suri)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https%3A%2F%2Fgithub.com%2Fjstayton%2Fsuri)
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https%3A%2F%2Fgithub.com%2Fjstayton%2Fsuri)
+### 管理和使用链接
 
-[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https%3A%2F%2Fgithub.com%2Fjstayton%2Fsuri%2Ftree%2Fmaster)
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https%3A%2F%2Fgithub.com%2Fjstayton%2Fsuri)
+如果您希望生成自己的短链接，请按照以下步骤操作：
 
-Once complete, try accessing the root path of your URL – it should redirect back
-to [my GitHub profile](https://github.com/jstayton) if everything's working.
-
-### Manage Links
-
-Links are managed through [`src/links.json`](src/links.json), which is seeded
-with a few examples to start:
+1. Fork 此仓库并克隆到你的机器上。
+2. 编辑 `src/links.json` 文件，添加新的短链接条目。示例如下：
 
 ```json
 {
-  "/": "https://github.com/jstayton",
-  "1": "https://fee.org/articles/the-use-of-knowledge-in-society/",
-  "tw": "https://twitter.com/kidjustino"
+  "/": "https://github.com/lxdao-official/suri/blob/master/src/links.json",
+  "opw": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_MTJhMTY0ZTMtYzUyYS00Y2U2LThlZDUtNmU5MzRiZGRlZWUy%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252233c37896-a852-458d-a347-2490bf4e6a9c%2522%252c%2522Oid%2522%253a%2522f3a85524-298d-4a59-8c92-4e83f89f84a0%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=10fdc731-3757-4330-8328-0a7346dcb2da&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true",
+  "tw": "https://twitter.com/LXDAO_Official",
+  "rw": "https://meeting.tencent.com/dm/l59WU3uZyKIP",
+  "efw": "https://meeting.tencent.com/dm/fA6aRc3FNCF9",
+  "fgw": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_NmEzMGVmNzktMmQ3Yy00YzA4LWFjYjktMWYxYzAzYmUwMDY5%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252233c37896-a852-458d-a347-2490bf4e6a9c%2522%252c%2522Oid%2522%253a%2522f3a85524-298d-4a59-8c92-4e83f89f84a0%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=365bd0d3-5ede-4a2c-8b57-6c055aa9b1e3&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true",
+  "CC": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_MGI4YTM4MTUtMTcyZC00MzQ3LTk4MzItZWRmMzBlNTRlZTUx%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252233c37896-a852-458d-a347-2490bf4e6a9c%2522%252c%2522Oid%2522%253a%2522f3a85524-298d-4a59-8c92-4e83f89f84a0%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=c94333d6-db75-4e57-a1d3-216524336687&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true",
+  "OPCN": "https://meeting.tencent.com/dm/Ovnau54PyP3a",
+  "govw": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_ODhhZjA3Y2UtNzMxOC00NjFhLWFhMjEtN2U3OWRjN2NkZDgx%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252233c37896-a852-458d-a347-2490bf4e6a9c%2522%252c%2522Oid%2522%253a%2522f3a85524-298d-4a59-8c92-4e83f89f84a0%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=63ef5241-0481-4ece-b207-92fe909f2099&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true"
 }
 ```
+3. 同时将你添加的地址填写到下面的表格中。
+4. 提交一个 Pull Request (PR)，我们会尽快审核并合并。
 
-It couldn't be simpler: the key is the "shortlink" path that gets redirected,
-and the value is the target URL. Keys can be as short or as long as you want,
-using whatever mixture of characters you want. `/` is a special entry for
-redirecting the root path.
+### 短链接和对应含义
 
-Go ahead and make an edit, then commit and push to your repository. The hosting
-provider you chose above should automatically build and deploy your change.
-That's it!
-
-_Pro tip_: Bookmark the page to
-[edit `src/links.json` directly in GitHub](https://github.com/jstayton/suri/edit/master/src/links.json)
-(or wherever), and use the default commit message that's populated. Now show me
-a link shortener that's easier than that!
-
-### Config
-
-Environment variables are used to set config options. There is only one at this
-point:
-
-| Variable  | Description                                                        | Values   | Default |
-| --------- | ------------------------------------------------------------------ | -------- | ------- |
-| `SURI_JS` | Whether to redirect with JavaScript instead of a `<meta>` refresh. | `1`, `0` | `0`     |
-
-### Install Manually
-
-To install Suri somewhere else, or just on your own machine:
-
-1. Fork this repository to create your own copy and clone to your machine.
-
-1. Make sure you have a compatible version of [Node.js](https://nodejs.org/)
-   (see `engines.node` in [`package.json`](package.json)).
-   [nvm](https://github.com/nvm-sh/nvm) is the recommended installation method
-   on your own machine:
-
-   ```bash
-   $ nvm install
-   ```
-
-1. Install dependencies with npm:
-
-   ```bash
-   $ npm install
-   ```
-
-1. Build the static site:
-
-   ```bash
-   $ npm run build
-   ```
-
-1. Deploy the generated `_site` directory to its final destination.
-
-## Development
-
-The following includes a few instructions for developing on Suri. For
-11ty-specific details – the static site generator that powers Suri – see their
-[docs](https://www.11ty.dev/docs/).
-
-### Install
-
-Follow the "Install Manually" section above to setup on your own machine.
-
-### Start
-
-Start the development server:
-
-```bash
-$ npm run dev
+| 短链接路径 | 短链接 | 含义          | 目标 URL |
+|----------|-----------|---------------|----------|
+| `/`       | `https://s.lxdao.io/` | 根路径        | [链接](https://github.com/lxdao-official/suri/blob/master/src/links.json) |
+| `opw`     | `https://s.lxdao.io/opw` | 运营周会      | [链接](https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_MTJhMTY0ZTMtYzUyYS00Y2U2LThlZDUtNmU5MzRiZGRlZWUy%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252233c37896-a852-458d-a347-2490bf4e6a9c%2522%252c%2522Oid%2522%253a%2522f3a85524-298d-4a59-8c92-4e83f89f84a0%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=10fdc731-3757-4330-8328-0a7346dcb2da&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true) |
+| `tw`      | `https://s.lxdao.io/tw` | LXDAO 官推    | [链接](https://twitter.com/LXDAO_Official) |
+| `rw`      | `https://s.lxdao.io/rw` | 专家小组周会  | [链接](https://meeting.tencent.com/dm/l59WU3uZyKIP) |
+| `efw`     | `https://s.lxdao.io/efw` | EIP Fun 项目周会 | [链接](https://meeting.tencent.com/dm/fA6aRc3FNCF9) |
+| `fgw`     | `https://s.lxdao.io/fgw` | Forge 小组周会 | [链接](https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_NmEzMGVmNzktMmQ3Yy00YzA4LWFjYjktMWYxYzAzYmUwMDY5%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252233c37896-a852-458d-a347-2490bf4e6a9c%2522%252c%2522Oid%2522%253a%2522f3a85524-298d-4a59-8c92-4e83f89f84a0%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=365bd0d3-5ede-4a2c-8b57-6c055aa9b1e3&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true) |
+| `CC`      | `https://s.lxdao.io/CC` | LXDAO 社区周会 | [链接](https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_MGI4YTM4MTUtMTcyZC00MzQ3LTk4MzItZWRmMzBlNTRlZTUx%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252233c37896-a852-458d-a347-2490bf4e6a9c%2522%252c%2522Oid%2522%253a%2522f3a85524-298d-4a59-8c92-4e83f89f84a0%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=c94333d6-db75-4e57-a1d3-216524336687&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true) |
+| `OPCN`    | `https://s.lxdao.io/OPCN` | OPCN 周会     | [链接](https://meeting.tencent.com/dm/Ovnau54PyP3a) |
+| `govw`    | `https://s.lxdao.io/govw` | 治理小组周会  | [链接](https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_ODhhZjA3Y2UtNzMxOC00NjFhLWFhMjEtN2U3OWRjN2NkZDgx%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%252233c37896-a852-458d-a347-2490bf4e6a9c%2522%252c%2522Oid%2522%253a%2522f3a85524-298d-4a59-8c92-4e83f89f84a0%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=63ef5241-0481-4ece-b207-92fe909f2099&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true) |
 ```
-
-### Code Style
-
-[Prettier](https://prettier.com/) is setup to enforce a consistent code style.
-It's highly recommended to
-[add an integration to your editor](https://prettier.io/docs/en/editors.html)
-that automatically formats on save.
-
-To run via the command line:
-
-```bash
-$ npm run lint
-```
-
-## Releasing
-
-After development is done in the `development` branch and is ready for release,
-it should be merged into the `master` branch, where the latest release code
-lives. [Release It!](https://github.com/release-it/release-it) is then used to
-interactively orchestrate the release process:
-
-```bash
-$ npm run release
-```
-
-![piratepx](https://app.piratepx.com/ship?p=e91ddd1b-31ad-4c36-b03e-be4a1e9a7678&i=suri)
