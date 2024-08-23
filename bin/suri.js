@@ -8,8 +8,8 @@ try {
 } catch (error) {
   console.error(`Error: ${error.message}`)
 
-  if (error.originalError) {
-    console.error(`  ↳ ${error.originalError.message}`)
+  if (error.cause) {
+    console.error(`  ↳ ${error.cause.message}`)
   }
 
   process.exitCode = 1

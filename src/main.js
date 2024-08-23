@@ -60,9 +60,9 @@ async function loadConfig({ path }) {
 
   try {
     config = await readFile(path)
-  } catch (error) {
-    if (!isErrorFileNotExists(error)) {
-      throw new SuriError('Failed to load config file', error)
+  } catch (cause) {
+    if (!isErrorFileNotExists(cause)) {
+      throw new SuriError('Failed to load config file', { cause })
     }
 
     console.log('No config file found, using default config')
@@ -72,8 +72,8 @@ async function loadConfig({ path }) {
 
   try {
     config = JSON.parse(config)
-  } catch (error) {
-    throw new SuriError('Failed to parse config as JSON', error)
+  } catch (cause) {
+    throw new SuriError('Failed to parse config as JSON', { cause })
   }
 
   return {
@@ -98,14 +98,14 @@ async function loadLinks({ path }) {
 
   try {
     links = await readFile(path)
-  } catch (error) {
-    throw new SuriError('Failed to load links file', error)
+  } catch (cause) {
+    throw new SuriError('Failed to load links file', { cause })
   }
 
   try {
     links = JSON.parse(links)
-  } catch (error) {
-    throw new SuriError('Failed to parse links as JSON', error)
+  } catch (cause) {
+    throw new SuriError('Failed to parse links as JSON', { cause })
   }
 
   return links
@@ -152,8 +152,10 @@ async function createLink({ linkPath, redirectURL, config, buildDirPath }) {
 
   try {
     await mkdir(linkDirPath, { recursive: true })
-  } catch (error) {
-    throw new SuriError(`Failed to create link directory: ${linkPath}`, error)
+  } catch (cause) {
+    throw new SuriError(`Failed to create link directory: ${linkPath}`, {
+      cause,
+    })
   }
 
   try {
@@ -161,8 +163,8 @@ async function createLink({ linkPath, redirectURL, config, buildDirPath }) {
       join(linkDirPath, 'index.html'),
       buildLinkPage({ redirectURL, config }),
     )
-  } catch (error) {
-    throw new SuriError(`Failed to create link file: ${linkPath}`, error)
+  } catch (cause) {
+    throw new SuriError(`Failed to create link file: ${linkPath}`, { cause })
   }
 
   return true
@@ -192,9 +194,9 @@ async function copyPublic({ path, buildDirPath }) {
         preserveTimestamps: true,
         recursive: true,
       })
-    } catch (error) {
-      if (!isErrorFileNotExists(error)) {
-        throw new SuriError('Failed to copy public directory', error)
+    } catch (cause) {
+      if (!isErrorFileNotExists(cause)) {
+        throw new SuriError('Failed to copy public directory', { cause })
       }
 
       console.log('No public directory found, skipping')
@@ -216,8 +218,8 @@ async function copyPublic({ path, buildDirPath }) {
 async function removeBuild({ path }) {
   try {
     return await rm(path, { recursive: true, force: true })
-  } catch (error) {
-    throw new SuriError('Failed to remove build directory', error)
+  } catch (cause) {
+    throw new SuriError('Failed to remove build directory', { cause })
   }
 }
 

@@ -9,17 +9,11 @@ class SuriError extends Error {
    * Create an error for Suri.
    *
    * @param {string} message The description of what failed.
-   * @param {Error} [originalError] The original error that was caught.
+   * @param {Object} [options]
+   * @param {Error} [options.cause] The underlying cause of the error.
    */
-  constructor(message, originalError = null) {
-    super(message)
-
-    /**
-     * The original error that was caught.
-     *
-     * @member {Error}
-     */
-    this.originalError = originalError
+  constructor(message, { cause = null } = {}) {
+    super(message, { cause })
 
     Error.captureStackTrace(this, this.constructor)
 
