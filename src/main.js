@@ -138,7 +138,7 @@ function buildLinkPage({ redirectURL, config }) {
  *
  * @private
  * @param {Object} params
- * @param {string} params.linkPath The shortlink path to redirect from.
+ * @param {string} params.linkPath The short link path to redirect from.
  * @param {string} params.redirectURL The target URL to redirect to.
  * @param {Object} params.config The parsed and merged config.
  * @param {string} params.buildDirPath The path to the build directory.

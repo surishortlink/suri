@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center" width="100%">
-  <i>Your own shortlinks as an easily deployed static site</i>
+  <i>Your own short links as an easily deployed static site</i>
 </h3>
 
 No server-side hosting, serverless cloud functions, or database necessary. Suri
@@ -12,7 +12,7 @@ a few minutes.
 
 Suri doesn't care about "technically superior" `3xx` server redirects. Suri just
 wants you to finally use that domain you spend \$59/year on and take back your
-shortlinks from the Bitlys and TinyURLs of the web.
+short links from the Bitlys and TinyURLs of the web.
 
 ## Try It Out
 
@@ -59,7 +59,7 @@ seeded with a few examples:
 }
 ```
 
-It couldn't be simpler: the key is the "shortlink" path that gets redirected,
+It couldn't be simpler: the key is the "short link" path that gets redirected,
 and the value is the target URL. Keys can be as short or as long as you want,
 using whatever mixture of characters you want. `/` is a special entry for
 redirecting the root path.
