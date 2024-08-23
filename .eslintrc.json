@@ -9,5 +9,19 @@
     "sourceType": "module"
   },
   "extends": ["eslint:recommended", "plugin:n/recommended", "prettier"],
+  "rules": {
+    "n/no-unsupported-features/node-builtins": [
+      "error",
+      {
+        "ignores": [
+          "fs/promises.cp",
+          "test",
+          "test.describe",
+          "test.it",
+          "test.it.skip"
+        ]
+      }
+    ]
+  },
   "ignorePatterns": ["docs"]
 }

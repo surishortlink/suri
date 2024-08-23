@@ -20,12 +20,12 @@
     "test": "node --test"
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-n": "^16.6.2",
-    "jsdoc": "^4.0.2",
-    "prettier": "3.2.4",
-    "release-it": "^17.0.3"
+    "eslint-plugin-n": "^17.10.2",
+    "jsdoc": "^4.0.3",
+    "prettier": "3.3.3",
+    "release-it": "^17.6.0"
   },
   "engines": {
     "node": ">=18"
