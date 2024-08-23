@@ -17,7 +17,7 @@
     "lint:quality": "eslint .",
     "lint:quality:fix": "eslint --fix .",
     "release": "release-it --only-version",
-    "test": "node --test ./src"
+    "test": "node --test"
   },
   "devDependencies": {
     "eslint": "^8.56.0",
