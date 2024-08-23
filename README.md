@@ -170,6 +170,25 @@ Install dependencies with npm:
 npm install
 ```
 
+### Tests
+
+The built-in Node.js [test runner](https://nodejs.org/docs/latest/api/test.html)
+and [assertions module](https://nodejs.org/docs/latest/api/assert.html) is used
+for testing.
+
+To run the tests:
+
+```bash
+npm test
+```
+
+During development, it's recommended to run the tests automatically on file
+change:
+
+```bash
+npm test -- --watch
+```
+
 ### Docs
 
 [JSDoc](https://jsdoc.app/) is used to document the code.

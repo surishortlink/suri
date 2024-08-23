@@ -13,22 +13,6 @@ import SuriError from './error.js'
 const SURI_DIR_PATH = join(dirname(fileURLToPath(import.meta.url)), '..')
 
 /**
- * The path to the current working directory of the Node.js process.
- *
- * @private
- * @constant {string}
- */
-const CWD_PATH = cwd()
-
-/**
- * The path to the build directory in the current working directory.
- *
- * @private
- * @constant {string}
- */
-const BUILD_DIR_PATH = join(CWD_PATH, 'build')
-
-/**
  * Tagged template function for composing HTML.
  *
  * @private
@@ -64,18 +48,18 @@ function isErrorFileNotExists(error) {
  * Load the config from `suri.config.json`, if it exists, merged with defaults.
  *
  * @private
+ * @param {Object} params
+ * @param {string} params.path The path to the `suri.config.json` file to load.
  * @throws {SuriError} If `suri.config.json` fails to be read or parsed.
  * @returns {Object} The parsed and merged config.
  */
-async function loadConfig() {
-  const configFilePath = join(CWD_PATH, 'suri.config.json')
-
-  console.log(`Config file: ${configFilePath}`)
+async function loadConfig({ path }) {
+  console.log(`Config file: ${path}`)
 
   let config
 
   try {
-    config = await readFile(configFilePath)
+    config = await readFile(path)
   } catch (error) {
     if (!isErrorFileNotExists(error)) {
       throw new SuriError('Failed to load config file', error)
@@ -102,18 +86,18 @@ async function loadConfig() {
  * Load the links from `links.json`.
  *
  * @private
+ * @param {Object} params
+ * @param {string} params.path The path to the `links.json` file to load.
  * @throws {SuriError} If `links.json` fails to be loaded or parsed.
  * @returns {Object} The parsed links.
  */
-async function loadLinks() {
-  const linkFilePath = join(CWD_PATH, 'src', 'links.json')
-
-  console.log(`Links file: ${linkFilePath}`)
+async function loadLinks({ path }) {
+  console.log(`Links file: ${path}`)
 
   let links
 
   try {
-    links = await readFile(linkFilePath)
+    links = await readFile(path)
   } catch (error) {
     throw new SuriError('Failed to load links file', error)
   }
@@ -157,11 +141,12 @@ function buildLinkPage({ redirectURL, config }) {
  * @param {string} params.linkPath The shortlink path to redirect from.
  * @param {string} params.redirectURL The target URL to redirect to.
  * @param {Object} params.config The parsed and merged config.
+ * @param {string} params.buildDirPath The path to the build directory.
  * @throws {SuriError} If the directory/file fails to be created.
  * @returns {true} If the link was created.
  */
-async function createLink({ linkPath, redirectURL, config }) {
-  const linkDirPath = join(BUILD_DIR_PATH, linkPath)
+async function createLink({ linkPath, redirectURL, config, buildDirPath }) {
+  const linkDirPath = join(buildDirPath, linkPath)
 
   console.log(`Creating link: ${linkPath}`)
 
@@ -187,23 +172,23 @@ async function createLink({ linkPath, redirectURL, config }) {
  * Copy the public directories/files to the build directory.
  *
  * The directory in this repository of "default" files is copied first, followed
- * by the directory in the current working directory, if it exists.
+ * by the directory in the source directory, if it exists.
  *
  * @private
+ * @param {Object} params
+ * @param {string} params.path The path to the public directory to copy.
+ * @param {string} params.buildDirPath The path to the build directory.
  * @throws {SuriError} If a directory/file fails to be copied.
  * @returns {true} If the directories/files were copied.
  */
-async function copyPublic() {
-  const publicDirPaths = [
-    join(SURI_DIR_PATH, 'public'),
-    join(CWD_PATH, 'public'),
-  ]
+async function copyPublic({ path, buildDirPath }) {
+  const publicDirPaths = [join(SURI_DIR_PATH, 'public'), path]
 
   for (const publicDirPath of publicDirPaths) {
     console.log(`Copying public directory: ${publicDirPath}`)
 
     try {
-      await cp(publicDirPath, BUILD_DIR_PATH, {
+      await cp(publicDirPath, buildDirPath, {
         preserveTimestamps: true,
         recursive: true,
       })
@@ -223,12 +208,14 @@ async function copyPublic() {
  * Remove the build directory and all of its child directories/files.
  *
  * @private
+ * @param {Object} params
+ * @param {string} params.path The path to the build directory to remove.
  * @throws {SuriError} If the directory fails to be removed.
  * @returns {undefined} If the directory was removed.
  */
-async function removeBuild() {
+async function removeBuild({ path }) {
   try {
-    return await rm(BUILD_DIR_PATH, { recursive: true, force: true })
+    return await rm(path, { recursive: true, force: true })
   } catch (error) {
     throw new SuriError('Failed to remove build directory', error)
   }
@@ -238,27 +225,37 @@ async function removeBuild() {
  * Build the static site from a `links.json` file.
  *
  * @memberof module:suri
+ * @param {Object} [params]
+ * @param {string} [params.path] The path to the directory to build from. Defaults to the current working directory of the Node.js process.
  * @throws {SuriError} If the build fails.
  * @returns {true} If the build succeeds.
  */
-async function main() {
+async function main({ path = cwd() } = {}) {
   try {
-    await removeBuild()
+    await removeBuild({ path: join(path, 'build') })
 
-    const config = await loadConfig()
-    const links = await loadLinks()
+    const config = await loadConfig({ path: join(path, 'suri.config.json') })
+    const links = await loadLinks({ path: join(path, 'src', 'links.json') })
 
     for (const [linkPath, redirectURL] of Object.entries(links)) {
-      await createLink({ linkPath, redirectURL, config })
+      await createLink({
+        linkPath,
+        redirectURL,
+        config,
+        buildDirPath: join(path, 'build'),
+      })
     }
 
-    await copyPublic()
+    await copyPublic({
+      path: join(path, 'public'),
+      buildDirPath: join(path, 'build'),
+    })
 
     console.log('Done!')
 
     return true
   } catch (error) {
-    await removeBuild()
+    await removeBuild({ path: join(path, 'build') })
 
     throw error
   }
