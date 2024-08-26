@@ -14,6 +14,12 @@
     "type": "git",
     "url": "git+https://github.com/jstayton/suri.git"
   },
+  "files": [
+    "public",
+    "src",
+    "!src/**/*.test.js",
+    "logo.png"
+  ],
   "scripts": {
     "docs": "jsdoc src --recurse --destination docs",
     "lint": "npm run lint:format && npm run lint:quality",
