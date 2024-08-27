@@ -14,8 +14,8 @@
     "shortlinks",
     "short links"
   ],
-  "homepage": "https://github.com/jstayton/suri#readme",
-  "bugs": "https://github.com/jstayton/suri/issues",
+  "homepage": "https://github.com/surishortlink/suri#readme",
+  "bugs": "https://github.com/surishortlink/suri/issues",
   "license": "MIT",
   "bin": {
     "suri": "bin/suri.js"
@@ -23,7 +23,7 @@
   "main": "./src/main.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jstayton/suri.git"
+    "url": "git+https://github.com/surishortlink/suri.git"
   },
   "files": [
     "bin",
