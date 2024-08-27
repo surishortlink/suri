@@ -1,5 +1,5 @@
 {
-  "name": "suri",
+  "name": "@surishortlink/suri",
   "version": "0.5.1",
   "type": "module",
   "description": "Your own short links as an easily deployed static site",
