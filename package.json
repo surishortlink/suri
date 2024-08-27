@@ -15,6 +15,7 @@
     "url": "git+https://github.com/jstayton/suri.git"
   },
   "files": [
+    "bin",
     "public",
     "src",
     "!src/**/*.test.js",
@@ -31,9 +32,11 @@
     "test": "node --test"
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
+    "@eslint/js": "^9.9.1",
+    "eslint": "^9.9.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-n": "^17.10.2",
+    "globals": "^15.9.0",
     "jsdoc": "^4.0.3",
     "prettier": "3.3.3",
     "release-it": "^17.6.0"
