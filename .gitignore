@@ -1,8 +1,8 @@
 # npm
 /node_modules
 
-# Logs
-npm-debug.log*
+# JSDoc
+/docs
 
-# 11ty
-/_site
+# Test builds
+/test/templates/*/build

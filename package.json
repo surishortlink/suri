@@ -1,27 +1,61 @@
 {
   "name": "suri",
   "version": "0.5.1",
-  "private": true,
-  "description": "Your own link shortener that's easily deployed as a static site (for free)",
-  "homepage": "https://github.com/jstayton/suri#readme",
-  "bugs": "https://github.com/jstayton/suri/issues",
+  "type": "module",
+  "description": "Your own short links as an easily deployed static site",
+  "keywords": [
+    "self-hosted",
+    "static site",
+    "url shortener",
+    "bitly",
+    "shorten urls",
+    "link shortener",
+    "shortlink",
+    "shortlinks",
+    "short links"
+  ],
+  "homepage": "https://github.com/surishortlink/suri#readme",
+  "bugs": "https://github.com/surishortlink/suri/issues",
   "license": "MIT",
-  "repository": "jstayton/suri",
+  "bin": {
+    "suri": "bin/suri.js"
+  },
+  "main": "./src/main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surishortlink/suri.git"
+  },
+  "files": [
+    "bin",
+    "public",
+    "src",
+    "!src/**/*.test.js",
+    "logo.png"
+  ],
   "scripts": {
-    "build": "npm run clean && NODE_ENV=production eleventy",
-    "clean": "del _site",
-    "dev": "eleventy --serve",
-    "lint": "prettier --check .",
-    "lint:fix": "prettier --write .",
-    "release": "release-it --only-version"
+    "docs": "jsdoc src --recurse --destination docs",
+    "lint": "npm run lint:format && npm run lint:quality",
+    "lint:format": "prettier --check .",
+    "lint:format:fix": "prettier --write .",
+    "lint:quality": "eslint .",
+    "lint:quality:fix": "eslint --fix .",
+    "release": "release-it --only-version",
+    "test": "node --test"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^1.0.2",
-    "del-cli": "^5.0.0",
-    "prettier": "2.8.1",
-    "release-it": "^15.6.0"
+    "@eslint/js": "^9.9.1",
+    "eslint": "^9.9.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-n": "^17.10.2",
+    "globals": "^15.9.0",
+    "jsdoc": "^4.0.3",
+    "prettier": "3.3.3",
+    "release-it": "^17.6.0"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
