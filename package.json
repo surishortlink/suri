@@ -3,6 +3,17 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Your own short links as an easily deployed static site",
+  "keywords": [
+    "self-hosted",
+    "static site",
+    "url shortener",
+    "bitly",
+    "shorten urls",
+    "link shortener",
+    "shortlink",
+    "shortlinks",
+    "short links"
+  ],
   "homepage": "https://github.com/jstayton/suri#readme",
   "bugs": "https://github.com/jstayton/suri/issues",
   "license": "MIT",
