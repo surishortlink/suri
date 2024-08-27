@@ -1,6 +1,6 @@
 {
   "name": "suri",
-  "version": "1.0.0",
+  "version": "0.5.1",
   "type": "module",
   "description": "Your own short links as an easily deployed static site",
   "keywords": [
