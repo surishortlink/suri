@@ -6,6 +6,15 @@
   <i>Your own short links as an easily deployed static site</i>
 </h3>
 
+<h3 align="center" width="100%">
+  <a href="https://www.npmjs.com/package/@surishortlink/suri">
+    <img src="https://img.shields.io/npm/v/@surishortlink/suri" alt="npm">
+  </a>
+  <a href="https://github.com/surishortlink/suri/actions">
+    <img src="https://github.com/surishortlink/suri/actions/workflows/ci.yml/badge.svg" alt="GitHub Actions">
+  </a>
+</h3>
+
 No server-side hosting, serverless cloud functions, or database necessary. Suri
 static sites can be deployed to Vercel, Netlify, and more (usually for free) in
 a few minutes.
