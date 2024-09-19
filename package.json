@@ -43,10 +43,10 @@
     "test": "node --test"
   },
   "devDependencies": {
-    "@eslint/js": "^9.9.1",
-    "eslint": "^9.9.1",
+    "@eslint/js": "^9.10.0",
+    "eslint": "^9.10.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-n": "^17.10.2",
+    "eslint-plugin-n": "^17.10.3",
     "globals": "^15.9.0",
     "jsdoc": "^4.0.3",
     "prettier": "3.3.3",
