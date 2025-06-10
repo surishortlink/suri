@@ -43,14 +43,14 @@
     "test": "node --test"
   },
   "devDependencies": {
-    "@eslint/js": "^9.10.0",
-    "eslint": "^9.10.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-n": "^17.10.3",
-    "globals": "^15.9.0",
-    "jsdoc": "^4.0.3",
-    "prettier": "3.3.3",
-    "release-it": "^17.6.0"
+    "@eslint/js": "^9.28.0",
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-n": "^17.19.0",
+    "globals": "^16.2.0",
+    "jsdoc": "^4.0.4",
+    "prettier": "3.5.3",
+    "release-it": "^19.0.3"
   },
   "engines": {
     "node": ">=18"
