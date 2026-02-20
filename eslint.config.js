@@ -21,7 +21,6 @@ export default [
         {
           ignores: [
             'fs/promises.cp',
-            'test',
             'test.describe',
             'test.it',
             'test.it.skip',
