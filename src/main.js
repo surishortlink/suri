@@ -116,21 +116,25 @@ async function loadLinks({ path }) {
  *
  * @private
  * @param {Object} params
- * @param {string} params.redirectURL The target URL to redirect to.
+ * @param {string} params.linkConfig The target URL to redirect to.
  * @param {Object} params.config The parsed and merged config.
  * @returns {string} The HTML page.
  */
-function buildLinkPage({ redirectURL, config }) {
+function buildLinkPage({ linkConfig, config }) {
+  if(!linkConfig.isArray()) {
   return html`
     <!doctype html>
     ${config.js
       ? html`
           <script>
-            window.location.replace('${redirectURL}')
+            window.location.replace('${linkConfig}')
           </script>
         `
-      : html`<meta http-equiv="refresh" content="0; url=${redirectURL}" />`}
+      : html`<meta http-equiv="refresh" content="0; url=${linkConfig}" />`}
   `
+    } else {
+      // todo
+    }
 }
 
 /**
@@ -139,13 +143,13 @@ function buildLinkPage({ redirectURL, config }) {
  * @private
  * @param {Object} params
  * @param {string} params.linkPath The short link path to redirect from.
- * @param {string} params.redirectURL The target URL to redirect to.
+ * @param {string} params.linkConfig The target URL to redirect to.
  * @param {Object} params.config The parsed and merged config.
  * @param {string} params.buildDirPath The path to the build directory.
  * @throws {SuriError} If the directory/file fails to be created.
  * @returns {true} If the link was created.
  */
-async function createLink({ linkPath, redirectURL, config, buildDirPath }) {
+async function createLink({ linkPath, linkConfig, config, buildDirPath }) {
   const linkDirPath = join(buildDirPath, linkPath)
 
   console.log(`Creating link: ${linkPath}`)
@@ -161,7 +165,7 @@ async function createLink({ linkPath, redirectURL, config, buildDirPath }) {
   try {
     await writeFile(
       join(linkDirPath, 'index.html'),
-      buildLinkPage({ redirectURL, config }),
+      buildLinkPage({ linkConfig, config }),
     )
   } catch (cause) {
     throw new SuriError(`Failed to create link file: ${linkPath}`, { cause })
@@ -239,10 +243,10 @@ async function main({ path = cwd() } = {}) {
     const config = await loadConfig({ path: join(path, 'suri.config.json') })
     const links = await loadLinks({ path: join(path, 'src', 'links.json') })
 
-    for (const [linkPath, redirectURL] of Object.entries(links)) {
+    for (const [linkPath, linkConfig] of Object.entries(links)) {
       await createLink({
         linkPath,
-        redirectURL,
+        linkConfig,
         config,
         buildDirPath: join(path, 'build'),
       })
