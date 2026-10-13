@@ -133,7 +133,7 @@ describe('main', () => {
 
       assert.equal(
         await readTemplatesFile('pass_js', 'build', 'index.html'),
-        "\n    <!doctype html>\n    \n          <script>\n            window.location.replace('https://www.youtube.com/watch?v=CsHiG-43Fzg')\n          </script>\n        \n  ",
+        "\n    <!doctype html>\n    \n            <script>\n              window.location.replace('https://www.youtube.com/watch?v=CsHiG-43Fzg')\n            </script>\n          \n  ",
       )
     })
 

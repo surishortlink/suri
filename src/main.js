@@ -123,13 +123,15 @@ async function loadLinks({ path }) {
 function buildLinkPage({ redirectURL, config }) {
   return html`
     <!doctype html>
-    ${config.js
-      ? html`
-          <script>
-            window.location.replace('${redirectURL}')
-          </script>
-        `
-      : html`<meta http-equiv="refresh" content="0; url=${redirectURL}" />`}
+    ${
+      config.js
+        ? html`
+            <script>
+              window.location.replace('${redirectURL}')
+            </script>
+          `
+        : html`<meta http-equiv="refresh" content="0; url=${redirectURL}" />`
+    }
   `
 }
 
