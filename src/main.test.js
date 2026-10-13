@@ -41,7 +41,7 @@ describe('main', () => {
       )
     })
 
-    it('throws `SuriError` when build directory fails to be removed', async () => {
+    it('throws `SuriError` when build directory fails to be removed', async (t) => {
       const buildDirPath = joinTemplates('fail_build_remove', 'build')
 
       await mkdir(buildDirPath, { recursive: true })
@@ -50,6 +50,7 @@ describe('main', () => {
         'fail',
       )
       await chmod(buildDirPath, 0o000)
+      t.after(() => chmod(buildDirPath, 0o777))
 
       await assert.rejects(
         async () => {
@@ -60,19 +61,18 @@ describe('main', () => {
           message: 'Failed to remove build directory',
         },
       )
-
-      await chmod(buildDirPath, 0o777)
     })
   })
 
   describe('loads config', () => {
-    it('throws `SuriError` when `suri.config.json` fails to be read', async () => {
+    it('throws `SuriError` when `suri.config.json` fails to be read', async (t) => {
       const configFilePath = joinTemplates(
         'fail_config_json_read',
         'suri.config.json',
       )
 
       await writeFile(configFilePath, 'fail', { mode: 0o000 })
+      t.after(() => rm(configFilePath))
 
       await assert.rejects(
         async () => {
@@ -83,8 +83,6 @@ describe('main', () => {
           message: 'Failed to load config file',
         },
       )
-
-      await rm(configFilePath)
     })
 
     it('throws `SuriError` when `suri.config.json` fails to be parsed as JSON', async () => {
@@ -155,7 +153,7 @@ describe('main', () => {
       )
     })
 
-    it('throws `SuriError` when `links.json` fails to be read', async () => {
+    it('throws `SuriError` when `links.json` fails to be read', async (t) => {
       const linksFilePath = joinTemplates(
         'fail_links_json_read',
         'src',
@@ -163,6 +161,7 @@ describe('main', () => {
       )
 
       await writeFile(linksFilePath, 'fail', { mode: 0o000 })
+      t.after(() => rm(linksFilePath))
 
       await assert.rejects(
         async () => {
@@ -173,8 +172,6 @@ describe('main', () => {
           message: 'Failed to load links file',
         },
       )
-
-      await rm(linksFilePath)
     })
 
     it('throws `SuriError` when `links.json` fails to be parsed as JSON', async () => {
@@ -299,7 +296,7 @@ describe('main', () => {
       )
     })
 
-    it('throws `SuriError` when a public directory/file fails to be copied', async () => {
+    it('throws `SuriError` when a public directory/file fails to be copied', async (t) => {
       const publicFilePath = joinTemplates(
         'fail_public_read',
         'public',
@@ -307,6 +304,7 @@ describe('main', () => {
       )
 
       await writeFile(publicFilePath, 'fail', { mode: 0o000 })
+      t.after(() => rm(publicFilePath))
 
       await assert.rejects(
         async () => {
@@ -317,8 +315,6 @@ describe('main', () => {
           message: 'Failed to copy public directory',
         },
       )
-
-      await rm(publicFilePath)
     })
   })
 

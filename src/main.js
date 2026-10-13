@@ -109,7 +109,7 @@ async function loadConfig({ path }) {
   let config
 
   try {
-    config = await readFile(path)
+    config = await readFile(path, { encoding: 'utf8' })
   } catch (cause) {
     if (!isErrorFileNotExists(cause)) {
       throw new SuriError('Failed to load config file', { cause })
@@ -147,7 +147,7 @@ async function loadLinks({ path }) {
   let links
 
   try {
-    links = await readFile(path)
+    links = await readFile(path, { encoding: 'utf8' })
   } catch (cause) {
     throw new SuriError('Failed to load links file', { cause })
   }
@@ -314,7 +314,8 @@ async function main({ path = cwd() } = {}) {
 
     return true
   } catch (error) {
-    await removeBuild({ path: join(path, 'build') })
+    // Ignore a cleanup failure so it doesn't mask the original error.
+    await removeBuild({ path: join(path, 'build') }).catch(() => {})
 
     throw error
   }
