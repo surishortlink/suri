@@ -12,7 +12,8 @@ permissions:
 # Cancel superseded runs on PRs only. Other runs are grouped by commit, so every
 # push to `development` and `main` keeps its result.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.sha }}
+  group:
+    ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
   cancel-in-progress: true
 
 jobs:
