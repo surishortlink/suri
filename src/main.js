@@ -45,6 +45,56 @@ function isErrorFileNotExists(error) {
 }
 
 /**
+ * Escape a string for use in a double-quoted HTML attribute value.
+ *
+ * @private
+ * @param {string} value The string to escape.
+ * @returns {string} The escaped string.
+ */
+function escapeHTMLAttribute(value) {
+  return value.replaceAll('&', '&amp;').replaceAll('"', '&quot;')
+}
+
+/**
+ * Serialize a string as a JavaScript string literal for use in a `<script>`.
+ *
+ * @private
+ * @param {string} value The string to serialize.
+ * @returns {string} The JavaScript string literal.
+ */
+function serializeScriptString(value) {
+  // Escape `<` so that a `</script>` in the value can't close the element.
+  return JSON.stringify(value).replaceAll('<', '\\u003c')
+}
+
+/**
+ * Validate the parsed links from `links.json`.
+ *
+ * @private
+ * @param {*} links The parsed links.
+ * @throws {SuriError} If the links are invalid.
+ * @returns {undefined} If the links are valid.
+ */
+function validateLinks(links) {
+  if (typeof links !== 'object' || links === null || Array.isArray(links)) {
+    throw new SuriError('Invalid links: must be a JSON object')
+  }
+
+  for (const [linkPath, redirectURL] of Object.entries(links)) {
+    // Split on `\` too, since it's also a path separator on Windows.
+    if (linkPath.split(/[/\\]/).includes('..')) {
+      throw new SuriError(`Invalid link "${linkPath}": path can't contain ".."`)
+    }
+
+    if (typeof redirectURL !== 'string' || redirectURL.trim() === '') {
+      throw new SuriError(
+        `Invalid link "${linkPath}": target URL must be a non-empty string`,
+      )
+    }
+  }
+}
+
+/**
  * Load the config from `suri.config.json`, if it exists, merged with defaults.
  *
  * @private
@@ -88,7 +138,7 @@ async function loadConfig({ path }) {
  * @private
  * @param {Object} params
  * @param {string} params.path The path to the `links.json` file to load.
- * @throws {SuriError} If `links.json` fails to be loaded or parsed.
+ * @throws {SuriError} If `links.json` fails to be loaded, parsed, or validated.
  * @returns {Object} The parsed links.
  */
 async function loadLinks({ path }) {
@@ -108,6 +158,8 @@ async function loadLinks({ path }) {
     throw new SuriError('Failed to parse links as JSON', { cause })
   }
 
+  validateLinks(links)
+
   return links
 }
 
@@ -121,16 +173,19 @@ async function loadLinks({ path }) {
  * @returns {string} The HTML page.
  */
 function buildLinkPage({ redirectURL, config }) {
+  const scriptURL = serializeScriptString(redirectURL)
+  const attributeURL = escapeHTMLAttribute(redirectURL)
+
   return html`
     <!doctype html>
     ${
       config.js
         ? html`
             <script>
-              window.location.replace('${redirectURL}')
+              window.location.replace(${scriptURL})
             </script>
           `
-        : html`<meta http-equiv="refresh" content="0; url=${redirectURL}" />`
+        : html`<meta http-equiv="refresh" content="0; url=${attributeURL}" />`
     }
   `
 }

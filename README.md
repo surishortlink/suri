@@ -70,8 +70,9 @@ seeded with a few examples:
 
 It couldn't be simpler: the key is the "short link" path that gets redirected,
 and the value is the target URL. Keys can be as short or as long as you want,
-using whatever mixture of characters you want. `/` is a special entry for
-redirecting the root path.
+and can include `/` for nested paths, like `gh/suri`. Avoid `?` and `#`, which
+browsers treat as the start of a query string or fragment. `/` is a special
+entry for redirecting the root path.
 
 ### Build Static Site
 
