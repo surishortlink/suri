@@ -2,7 +2,11 @@ import assert from 'node:assert/strict'
 import { access, chmod, mkdir, rm, writeFile } from 'node:fs/promises'
 import { describe, it } from 'node:test'
 import main from './main.js'
-import { joinTemplates, readTemplatesFile } from '../test/utilities.js'
+import {
+  joinTemplates,
+  readTemplatesFile,
+  readTemplatesHTML,
+} from '../test/utilities.js'
 
 describe('main', () => {
   describe('removes build directory', () => {
@@ -27,12 +31,12 @@ describe('main', () => {
 
     it('removes build directory when an error occurs', async () => {
       await assert.rejects(async () => {
-        await main({ path: joinTemplates('fail_config_json') })
+        await main({ path: joinTemplates('fail_link_file_create') })
       })
 
       await assert.rejects(
         async () => {
-          await access(joinTemplates('fail_config_json', 'build'))
+          await access(joinTemplates('fail_link_file_create', 'build'))
         },
         {
           name: 'Error',
@@ -98,61 +102,7 @@ describe('main', () => {
     })
   })
 
-  describe('creates links', () => {
-    it('creates the `/` link in the root directory', async () => {
-      await main({ path: joinTemplates('pass') })
-
-      assert.equal(
-        await readTemplatesFile('pass', 'build', 'index.html'),
-        '\n    <!doctype html>\n    <meta http-equiv="refresh" content="0; url=https://www.youtube.com/watch?v=CsHiG-43Fzg" />\n  ',
-      )
-    })
-
-    it('creates a link consisting of letters in a directory of the same name', async () => {
-      await main({ path: joinTemplates('pass') })
-
-      assert.equal(
-        await readTemplatesFile('pass', 'build', 'gh', 'index.html'),
-        '\n    <!doctype html>\n    <meta http-equiv="refresh" content="0; url=https://github.com/surishortlink/suri" />\n  ',
-      )
-    })
-
-    it('creates a link consisting of numbers in a directory of the same name', async () => {
-      await main({ path: joinTemplates('pass') })
-
-      assert.equal(
-        await readTemplatesFile('pass', 'build', '1', 'index.html'),
-        '\n    <!doctype html>\n    <meta http-equiv="refresh" content="0; url=https://fee.org/articles/the-use-of-knowledge-in-society/" />\n  ',
-      )
-    })
-
-    it('creates links with JavaScript redirect if `js` config enabled', async () => {
-      await main({ path: joinTemplates('pass_js') })
-
-      assert.equal(
-        await readTemplatesFile('pass_js', 'build', 'index.html'),
-        '\n    <!doctype html>\n    \n            <script>\n              window.location.replace("https://www.youtube.com/watch?v=CsHiG-43Fzg")\n            </script>\n          \n  ',
-      )
-    })
-
-    it('escapes the target URL in the `<meta>` refresh', async () => {
-      await main({ path: joinTemplates('pass') })
-
-      assert.equal(
-        await readTemplatesFile('pass', 'build', 'escaped', 'index.html'),
-        '\n    <!doctype html>\n    <meta http-equiv="refresh" content="0; url=https://example.com/?q=it\'s&amp;a=&quot;b&quot;</script>" />\n  ',
-      )
-    })
-
-    it('escapes the target URL in the JavaScript redirect', async () => {
-      await main({ path: joinTemplates('pass_js') })
-
-      assert.equal(
-        await readTemplatesFile('pass_js', 'build', 'escaped', 'index.html'),
-        '\n    <!doctype html>\n    \n            <script>\n              window.location.replace("https://example.com/?q=it\'s&a=\\"b\\"\\u003c/script>")\n            </script>\n          \n  ',
-      )
-    })
-
+  describe('loads links', () => {
     it('throws `SuriError` when `links.json` fails to be read', async (t) => {
       const linksFilePath = joinTemplates(
         'fail_links_json_read',
@@ -222,6 +172,18 @@ describe('main', () => {
       )
     })
 
+    it('throws `SuriError` when a target URL is only whitespace', async () => {
+      await assert.rejects(
+        async () => {
+          await main({ path: joinTemplates('fail_links_url_blank') })
+        },
+        {
+          name: 'SuriError',
+          message: 'Invalid link "gh": target URL must be a non-empty string',
+        },
+      )
+    })
+
     it('throws `SuriError` when a link path contains ".."', async () => {
       await assert.rejects(
         async () => {
@@ -231,6 +193,85 @@ describe('main', () => {
           name: 'SuriError',
           message: 'Invalid link "../gh": path can\'t contain ".."',
         },
+      )
+    })
+
+    it('throws `SuriError` when a link path contains ".." with a Windows separator', async () => {
+      await assert.rejects(
+        async () => {
+          await main({
+            path: joinTemplates('fail_links_path_dot_dot_backslash'),
+          })
+        },
+        {
+          name: 'SuriError',
+          message: 'Invalid link "..\\gh": path can\'t contain ".."',
+        },
+      )
+    })
+  })
+
+  describe('creates links', () => {
+    it('creates the `/` link in the root directory', async () => {
+      await main({ path: joinTemplates('pass') })
+
+      assert.equal(
+        await readTemplatesHTML('pass', 'build', 'index.html'),
+        '<!doctype html> <meta http-equiv="refresh" content="0; url=https://www.youtube.com/watch?v=CsHiG-43Fzg" />',
+      )
+    })
+
+    it('creates a link consisting of letters in a directory of the same name', async () => {
+      await main({ path: joinTemplates('pass') })
+
+      assert.equal(
+        await readTemplatesHTML('pass', 'build', 'gh', 'index.html'),
+        '<!doctype html> <meta http-equiv="refresh" content="0; url=https://github.com/surishortlink/suri" />',
+      )
+    })
+
+    it('creates a link consisting of numbers in a directory of the same name', async () => {
+      await main({ path: joinTemplates('pass') })
+
+      assert.equal(
+        await readTemplatesHTML('pass', 'build', '1', 'index.html'),
+        '<!doctype html> <meta http-equiv="refresh" content="0; url=https://fee.org/articles/the-use-of-knowledge-in-society/" />',
+      )
+    })
+
+    it('creates a nested link in nested directories', async () => {
+      await main({ path: joinTemplates('pass') })
+
+      assert.equal(
+        await readTemplatesHTML('pass', 'build', 'gh', 'suri', 'index.html'),
+        '<!doctype html> <meta http-equiv="refresh" content="0; url=https://github.com/surishortlink/suri" />',
+      )
+    })
+
+    it('creates links with JavaScript redirect if `js` config enabled', async () => {
+      await main({ path: joinTemplates('pass_js') })
+
+      assert.equal(
+        await readTemplatesHTML('pass_js', 'build', 'index.html'),
+        '<!doctype html> <script> window.location.replace("https://www.youtube.com/watch?v=CsHiG-43Fzg") </script>',
+      )
+    })
+
+    it('escapes the target URL in the `<meta>` refresh', async () => {
+      await main({ path: joinTemplates('pass') })
+
+      assert.equal(
+        await readTemplatesHTML('pass', 'build', 'escaped', 'index.html'),
+        '<!doctype html> <meta http-equiv="refresh" content="0; url=https://example.com/?q=it\'s&amp;a=&quot;b&quot;</script>" />',
+      )
+    })
+
+    it('escapes the target URL in the JavaScript redirect', async () => {
+      await main({ path: joinTemplates('pass_js') })
+
+      assert.equal(
+        await readTemplatesHTML('pass_js', 'build', 'escaped', 'index.html'),
+        '<!doctype html> <script> window.location.replace("https://example.com/?q=it\'s&a=\\"b\\"\\u003c/script>") </script>',
       )
     })
 

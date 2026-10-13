@@ -27,6 +27,7 @@
   },
   "files": [
     "bin",
+    "!bin/**/*.test.js",
     "public",
     "src",
     "!src/**/*.test.js",

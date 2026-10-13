@@ -15,4 +15,10 @@ async function readTemplatesFile(...paths) {
   return await readFile(joinTemplates(...paths), { encoding: 'utf8' })
 }
 
-export { joinTemplates, readTemplatesFile }
+// Collapse whitespace so that assertions don't depend on how Prettier indents
+// the HTML templates.
+async function readTemplatesHTML(...paths) {
+  return (await readTemplatesFile(...paths)).replace(/\s+/g, ' ').trim()
+}
+
+export { joinTemplates, readTemplatesFile, readTemplatesHTML }
