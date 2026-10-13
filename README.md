@@ -245,5 +245,3 @@ npm run release
 
 Once the release process is complete, merge the `development` branch into the
 `main` branch, which should always reflect the latest release.
-
-![piratepx](https://app.piratepx.com/ship?p=e91ddd1b-31ad-4c36-b03e-be4a1e9a7678&i=suri)
