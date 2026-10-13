@@ -170,7 +170,12 @@ There are a few other noteworthy changes in v1 beyond that:
 ### Prerequisites
 
 The only prerequisite is a compatible version of Node.js (see `engines.node` in
-[`package.json`](package.json)).
+[`package.json`](package.json)). With [nvm](https://github.com/nvm-sh/nvm), you
+can install the version in [`.nvmrc`](.nvmrc):
+
+```bash
+nvm install
+```
 
 ### Dependencies
 
@@ -211,16 +216,16 @@ npm run docs
 
 ### Code Style & Linting
 
-[Prettier](https://prettier.io/) is setup to enforce a consistent code style.
+[Prettier](https://prettier.io/) is set up to enforce a consistent code style.
 It's highly recommended to
 [add an integration to your editor](https://prettier.io/docs/en/editors.html)
 that automatically formats on save.
 
-[ESLint](https://eslint.org/) is setup with the
+[ESLint](https://eslint.org/) is set up with the
 ["recommended" rules](https://eslint.org/docs/latest/rules/) to enforce a level
 of code quality. It's also highly recommended to
 [add an integration to your editor](https://eslint.org/docs/latest/use/integrations#editors)
-that automatically formats on save.
+that highlights issues as you code.
 
 To run via the command line:
 
