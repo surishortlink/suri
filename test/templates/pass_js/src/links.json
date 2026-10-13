@@ -1,3 +1,4 @@
 {
-  "/": "https://www.youtube.com/watch?v=CsHiG-43Fzg"
+  "/": "https://www.youtube.com/watch?v=CsHiG-43Fzg",
+  "escaped": "https://example.com/?q=it's&a=\"b\"</script>"
 }

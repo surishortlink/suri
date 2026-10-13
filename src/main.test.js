@@ -133,7 +133,25 @@ describe('main', () => {
 
       assert.equal(
         await readTemplatesFile('pass_js', 'build', 'index.html'),
-        "\n    <!doctype html>\n    \n            <script>\n              window.location.replace('https://www.youtube.com/watch?v=CsHiG-43Fzg')\n            </script>\n          \n  ",
+        '\n    <!doctype html>\n    \n            <script>\n              window.location.replace("https://www.youtube.com/watch?v=CsHiG-43Fzg")\n            </script>\n          \n  ',
+      )
+    })
+
+    it('escapes the target URL in the `<meta>` refresh', async () => {
+      await main({ path: joinTemplates('pass') })
+
+      assert.equal(
+        await readTemplatesFile('pass', 'build', 'escaped', 'index.html'),
+        '\n    <!doctype html>\n    <meta http-equiv="refresh" content="0; url=https://example.com/?q=it\'s&amp;a=&quot;b&quot;</script>" />\n  ',
+      )
+    })
+
+    it('escapes the target URL in the JavaScript redirect', async () => {
+      await main({ path: joinTemplates('pass_js') })
+
+      assert.equal(
+        await readTemplatesFile('pass_js', 'build', 'escaped', 'index.html'),
+        '\n    <!doctype html>\n    \n            <script>\n              window.location.replace("https://example.com/?q=it\'s&a=\\"b\\"\\u003c/script>")\n            </script>\n          \n  ',
       )
     })
 
@@ -141,7 +159,7 @@ describe('main', () => {
       const linksFilePath = joinTemplates(
         'fail_links_json_read',
         'src',
-        'suri.config.json',
+        'links.json',
       )
 
       await writeFile(linksFilePath, 'fail', { mode: 0o000 })
@@ -171,12 +189,76 @@ describe('main', () => {
       )
     })
 
-    it.skip('throws `SuriError` when a link directory fails to be created', async () => {
-      // TODO: Figure out how to test this.
+    it('throws `SuriError` when `links.json` is not an object', async () => {
+      await assert.rejects(
+        async () => {
+          await main({ path: joinTemplates('fail_links_not_object') })
+        },
+        {
+          name: 'SuriError',
+          message: 'Invalid links: must be a JSON object',
+        },
+      )
     })
 
-    it.skip('throws `SuriError` when a link file fails to be created', async () => {
-      // TODO: Figure out how to test this.
+    it('throws `SuriError` when a target URL is not a string', async () => {
+      await assert.rejects(
+        async () => {
+          await main({ path: joinTemplates('fail_links_url_type') })
+        },
+        {
+          name: 'SuriError',
+          message: 'Invalid link "gh": target URL must be a non-empty string',
+        },
+      )
+    })
+
+    it('throws `SuriError` when a target URL is empty', async () => {
+      await assert.rejects(
+        async () => {
+          await main({ path: joinTemplates('fail_links_url_empty') })
+        },
+        {
+          name: 'SuriError',
+          message: 'Invalid link "gh": target URL must be a non-empty string',
+        },
+      )
+    })
+
+    it('throws `SuriError` when a link path contains ".."', async () => {
+      await assert.rejects(
+        async () => {
+          await main({ path: joinTemplates('fail_links_path_dot_dot') })
+        },
+        {
+          name: 'SuriError',
+          message: 'Invalid link "../gh": path can\'t contain ".."',
+        },
+      )
+    })
+
+    it('throws `SuriError` when a link directory fails to be created', async () => {
+      await assert.rejects(
+        async () => {
+          await main({ path: joinTemplates('fail_link_dir_create') })
+        },
+        {
+          name: 'SuriError',
+          message: 'Failed to create link directory: x/index.html/y',
+        },
+      )
+    })
+
+    it('throws `SuriError` when a link file fails to be created', async () => {
+      await assert.rejects(
+        async () => {
+          await main({ path: joinTemplates('fail_link_file_create') })
+        },
+        {
+          name: 'SuriError',
+          message: 'Failed to create link file: x',
+        },
+      )
     })
   })
 
