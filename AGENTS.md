@@ -30,9 +30,10 @@ There's no build or typecheck step. A change is verified by `npm run lint` and
 - `npm run docs`: generates JSDoc HTML into the git-ignored `docs` directory.
   JSDoc's default `excludePattern` skips any path segment starting with `_`, so
   the output is empty if the checkout lives under a directory like `_personal`.
-- `npm run release`: release-it, run by the maintainer on `development`. It
-  bumps the version, commits, tags `vX.Y.Z`, pushes, publishes to npm, and
-  creates the GitHub release.
+- `npm run release`: release-it, run by the maintainer on a `release/x.x.x`
+  branch cut from `development`. It bumps the version, commits, tags `vX.Y.Z`,
+  pushes, publishes to npm, and creates the GitHub release. See "Releasing" in
+  the README for the full process.
 
 Node.js versions are set in three places: `engines.node` in `package.json` (the
 minimum supported version), the CI matrix in `.github/workflows/ci.yml` (the
@@ -115,6 +116,7 @@ inspects the `build` directory it creates, which is git-ignored.
 
 ## Branches
 
-Branch off `development` and open pull requests against it. After a release,
-`development` is merged into `main`, which should always reflect the latest
-release.
+Branch off `development` and open pull requests against it. Releases go through
+a `release/x.x.x` pull request into `main`, which should always reflect the
+latest release. It's merged with a merge commit, after which `development` is
+fast-forwarded to `main`.
