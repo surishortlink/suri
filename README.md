@@ -235,13 +235,25 @@ npm run lint
 
 ## Releasing
 
-When the `development` branch is ready for release,
-[Release It!](https://github.com/release-it/release-it) is used to orchestrate
-the release process:
+When the `development` branch is ready for release, create a `release/x.x.x`
+branch from it and open a pull request into `main` titled "Release vx.x.x". On
+the release branch, use [Release It!](https://github.com/release-it/release-it)
+to bump the version, tag, push, and publish to npm:
 
 ```bash
 npm run release
 ```
 
-Once the release process is complete, merge the `development` branch into the
-`main` branch, which should always reflect the latest release.
+Release It! publishes the GitHub Release when `GITHUB_TOKEN` is set, and
+otherwise falls back to a prefilled release form in the browser.
+
+Once the pull request is approved, merge it with a merge commit, not a squash,
+so that `main`, which should always reflect the latest release, keeps the same
+history as `development`. Then fast-forward `development` to pick up the version
+bump:
+
+```bash
+git checkout development
+git pull --ff-only origin main
+git push
+```
