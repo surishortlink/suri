@@ -1,3 +1,4 @@
 # Test files with invalid syntax
 /test/templates/fail_config_json/suri.config.json
 /test/templates/fail_links_json/src/links.json
+/test/templates/fail_cli/src/links.json

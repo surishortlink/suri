@@ -19,13 +19,7 @@ export default [
       'n/no-unsupported-features/node-builtins': [
         'error',
         {
-          ignores: [
-            'fs/promises.cp',
-            'test',
-            'test.describe',
-            'test.it',
-            'test.it.skip',
-          ],
+          ignores: ['fs/promises.cp'],
         },
       ],
     },

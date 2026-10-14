@@ -12,10 +12,8 @@ class SuriError extends Error {
    * @param {Object} [options]
    * @param {Error} [options.cause] The underlying cause of the error.
    */
-  constructor(message, { cause = null } = {}) {
-    super(message, { cause })
-
-    Error.captureStackTrace(this, this.constructor)
+  constructor(message, options) {
+    super(message, options)
 
     this.name = this.constructor.name
   }
