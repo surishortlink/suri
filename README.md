@@ -39,6 +39,7 @@ to see how it works.
 Suri has template repositories that make it super easy to get started. Choose
 the platform you're deploying to and follow the step by step instructions:
 
+- [Deploy to Cloudflare](https://github.com/surishortlink/suri-deploy-cloudflare)
 - [Deploy to DigitalOcean](https://github.com/surishortlink/suri-deploy-digitalocean)
 - [Deploy to GitHub Pages](https://github.com/surishortlink/suri-deploy-github)
 - [Deploy to Netlify](https://github.com/surishortlink/suri-deploy-netlify)
