@@ -42,6 +42,7 @@ the platform you're deploying to and follow the step by step instructions:
 - [Deploy to Cloudflare](https://github.com/surishortlink/suri-deploy-cloudflare)
 - [Deploy to DigitalOcean](https://github.com/surishortlink/suri-deploy-digitalocean)
 - [Deploy to GitHub Pages](https://github.com/surishortlink/suri-deploy-github)
+- [Deploy to GitLab Pages](https://github.com/surishortlink/suri-deploy-gitlab)
 - [Deploy to Netlify](https://github.com/surishortlink/suri-deploy-netlify)
 - [Deploy to Render](https://github.com/surishortlink/suri-deploy-render)
 - [Deploy to Vercel](https://github.com/surishortlink/suri-deploy-vercel)
