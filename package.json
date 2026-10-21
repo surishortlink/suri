@@ -31,7 +31,7 @@
     "public",
     "src",
     "!src/**/*.test.js",
-    "logo.png"
+    "logo.svg"
   ],
   "scripts": {
     "docs": "jsdoc src --recurse --destination docs",

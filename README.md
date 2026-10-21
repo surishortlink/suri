@@ -1,5 +1,5 @@
 <h1 align="center" width="100%">
-  <img src="logo.png" width="200" alt="Suri" />
+  <img src="logo.svg" width="200" alt="Suri" />
 </h1>
 
 <h3 align="center" width="100%">
